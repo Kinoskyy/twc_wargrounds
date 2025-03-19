@@ -1,0 +1,36 @@
+<config>
+    <mappack automatics="cycler|lobby,cycler,voting,random">
+        <cycler resnames="[&apos;arena_MBP_x2_1&apos;,&apos;arena_MBP_x2_1&apos;,&apos;arena_MBP_x2_2&apos;,&apos;arena_MBP_x2_2&apos;,&apos;arena_MBP_x2_3&apos;,&apos;arena_MBP_x2_3&apos;,&apos;arena_MBP_x2_4&apos;,&apos;arena_MBP_x2_4&apos;,&apos;arena_MBP_x2_5&apos;,&apos;arena_MBP_x2_5&apos;,&apos;arena_MBP_x2_6&apos;,&apos;arena_MBP_x2_6&apos;]"></cycler>
+        <disabled resnames="[]"></disabled>
+    </mappack>
+    <settings>
+        <mode name="arena" enable="true" timelimit="2:30" spawnprotect="0:02.2"></mode>
+        <mode name="ctf" flag_water_respawn="false" flag_idle_respawn="0:45" respawn_time="0:02.5" spawnprotect="0:02.2" flag_speed="0.8" respawn_lives="0" timelimit="16:07:00" respawn="true" enable="true"></mode>
+        <settings player_dead_visible="false" vehicle_respawn_blown="0:00" autoswap="true" gravity="0.008" player_information="true" vehicle_respawn_idle="0:00" gamespeed="1.0" heli_killing="true" respawn_time="0:07.5" vote_duration="0:10" blurlevel="0" ghostmode="none|none,team,all" autobalance="false" player_can_driveby="false" player_start_health="100" vehicle_per_player="1" time="12:00" vehicle_radarblip="none|none,unoccupied,always" friendly_fire="false" vehicle_nametag="false" respawn="false" spectate_enemy="false" player_start_armour="100" countdown_auto="true" player_nametag="all|none,team,all" dontfire="false" respawn_lives="0" countdown_start="0" streetlamps="true" time_locked="true" player_radarblip="team|none,team,all" vote="false" countdown_force="0:00" time_minuteduration="1000" timeout_to_pause="false" vehicle_tank_explodable="false" vehicle_color="default|default,teamcolor" stealth_killing="true"></settings>
+        <glitches fastmove="true" closedamage="false" fastfire="true" crouchbug="true" quickreload="true"></glitches>
+        <cheats aircars="false" hovercars="false" magnetcars="false" extrabunny="false" extrajump="false" knockoffbike="false"></cheats>
+        <limites packetloss_total="100" ping_maximal="11111" warnings_packetloss="100" fps_limit="100" warnings_ping="10" packetloss_second="100" fps_minimal="25" warnings_fps="10"></limites>
+    </settings>
+    <teams>
+        <referee name="REFEREE" color="[255,255,255]"></referee>
+        <team side="1" name="Attackers" skins="[170]" color="[215,0,0]"></team>
+        <team side="2" name="Defenders" skins="[176]" color="[31,8,225]"></team>
+    </teams>
+    <weaponpack slots="3">
+        <weapons shotgun="99999" deagle="999" m4="999" rifle="99999" sniper="99999" grenade="1"></weapons>
+        <balance SS-gun="1" grenade="0"></balance>
+        <cost grenade="3113"></cost>
+        <slot shotgun="3" sniper="6" coachgun="3" knife="1" rifle="6" nightstick="1" deagle="2" minigun="7" uzi="4" python="2" silenced="2" ak47="5" crossbow="6" saw="1" flash="8" tec9="4" rpg="7" grenade="0" SS-gun="1" flame="8" sawnoff="3" m60="5" parachute="11" infrared="11" spraycan="8" fireextinguisher="8" mp5="4" camera="9" armor="8" landmine="8" m4="5" colt45="2" spas12="3" shovel="1"></slot>
+    </weaponpack>
+    <vehiclepack models="[570,464,441,449,465,450,590,435,591,607,608,601,538,594,610,476,611,430,407,564,520,537,501,447,584,569,606]"></vehiclepack>
+    <weather>
+        <weather hour="0" wind="[0.16,0.15,0.00]" rain="0" far="400" fog="100" sky="[0,23,24,0,31,32]" clouds="true" birds="true" sun="[255,128,0,5,0,0,1.00]" water="[85,85,65,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="5" wind="[0.00,0.00,0.00]" rain="0" far="400" fog="100" sky="[0,20,20,0,31,32]" clouds="true" birds="true" sun="[255,128,0,255,128,0,0.00]" water="[53,104,104,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="6" wind="[0.00,0.00,0.00]" rain="0" far="800" fog="100" sky="[90,205,255,200,144,85]" clouds="true" birds="true" sun="[255,128,0,255,128,0,8.40]" water="[90,170,170,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="7" wind="[0.16,0.15,0.00]" rain="0" far="800" fog="100" sky="[0,64,162,12,112,199]" clouds="true" birds="true" sun="[201,88,13,248,197,49,5.00]" water="[145,170,170,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="12" wind="[0.00,0.00,0.00]" rain="0" far="800" fog="10" sky="[68,117,210,36,117,199]" clouds="true" birds="true" sun="[255,255,255,255,255,255,1.10]" water="[90,170,170,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="19" wind="[0.00,0.00,0.00]" rain="0" far="800" fog="10" sky="[68,117,210,36,117,194]" clouds="true" birds="true" sun="[222,88,0,122,55,0,3.90]" water="[50,97,97,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="20" wind="[0.00,0.00,0.00]" rain="0" far="800" fog="10" sky="[181,150,84,167,108,65]" clouds="true" birds="true" sun="[255,128,0,255,128,0,2.00]" water="[67,67,67,240]" wave="0" level="0" heat="0" effect="0"></weather>
+        <weather hour="22" wind="[0.16,0.15,0.00]" rain="0" far="600" fog="10" sky="[137,100,84,60,50,52]" clouds="true" birds="true" sun="[255,128,0,5,8,0,1.00]" water="[67,67,62,240]" wave="0" level="0" heat="0" effect="0"></weather>
+    </weather>
+</config>
