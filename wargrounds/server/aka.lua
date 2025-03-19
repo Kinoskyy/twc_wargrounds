@@ -20,7 +20,6 @@ function akaCommand(p, _, id)
 	end
 end
 addCommandHandler("aka", akaCommand)
-
 addEventHandler("onPlayerJoin", root, function() checkAKA(source) end)
 
 function getPlayerAKAS(p)
@@ -60,5 +59,4 @@ function checkAKA(player)
 		end
 	end
 end
-
 addEventHandler("onPlayerChangeNick", root, function() setTimer(checkAKA, 600, 1, source) end)
