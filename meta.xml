@@ -1,0 +1,183 @@
+<meta>
+	<info type="gamemode" name="Tactics" version="Wargrounds" author="Lex128 (edited by ZoNe)" edf:definition="modes/tactics.edf"/>
+	<min_mta_version client="1.5.5-9.14060" server="1.5.5-9.14060"/>
+	<oop>true</oop>
+	<script src="tactics.luac"/>
+	<script src="tactics_client.luac" type="client" protected="0"/>
+
+	<script src="wargrounds/overwrite.lua" type="shared"/>
+    
+	<!-- Wargrounds Client -->
+	<script src="wargrounds/client/AC_C.lua" type="client"/>
+	<script src="wargrounds/client/anticheat_c.lua" type="client"/>
+	<script src="wargrounds/client/armagirando_C.lua" type="client"/>
+	<script src="wargrounds/client/config.lua" type="client"/>
+	<script src="wargrounds/client/cross.lua" type="client"/>
+	<script src="wargrounds/client/dancingTactics_C.lua" type="client"/>
+	<script src="wargrounds/client/expl_C.lua" type="client"/>
+	<script src="wargrounds/client/killer.lua" type="client"/>
+	<script src="wargrounds/client/mark_C.lua" type="client"/>
+	<script src="wargrounds/client/top_round_c.lua" type="client"/>
+
+	<!-- Wargrounds Server	 -->
+	<script src="wargrounds/server/AC_S.lua" type="server"/>
+	<script src="wargrounds/server/aka.lua" type="server"/>
+	<script src="wargrounds/server/anticheat.lua" type="server"/>
+	<script src="wargrounds/server/armagirando_S.lua" type="server"/>
+	<script src="wargrounds/server/chat.lua" type="server"/>
+	<script src="wargrounds/server/expl_S.lua" type="server"/>
+	<script src="wargrounds/server/mark_S.lua" type="server"/>
+	<script src="wargrounds/server/players_s.lua" type="server"/>
+	<script src="wargrounds/server/rs.lua" type="server"/>
+	<script src="wargrounds/server/top_round.lua" type="server"/>
+	<script src="wargrounds/server/utils.lua" type="server"/>
+	<script src="wargrounds/server/wargrounds.lua" type="server"/>
+    
+	<script src="modes/arena.lua" />
+	<script src="modes/arena_client.lua" type="client" />
+	<script src="modes/ctf.lua" />
+	<script src="modes/ctf_client.lua" type="client" />
+	<file src="modes/edf_client.lua"/>
+	<file src="modes/tactics.edf"/>
+	<config src="language/languages.xml" type="client"/>
+	<config src="language/english.lng" type="client"/>
+    
+	<export function="getRoundMapInfo" type="server"/>
+	<export function="getRoundMapInfo" type="client"/>
+	<export function="getUnreadyPlayers" type="server"/>
+	<export function="getUnreadyPlayers" type="client"/>
+	<export function="isRoundStarted" type="server"/>
+	<export function="isRoundStarted" type="client"/>
+	<export function="isRoundPaused" type="server"/>
+	<export function="isRoundPaused" type="client"/>
+	<export function="getTacticsData" type="server"/>
+	<export function="getTacticsData" type="client"/>
+	<export function="getAllTacticsData" type="server"/>
+	<export function="getAllTacticsData" type="client"/>
+	<export function="setTacticsData" type="server"/>
+	<export function="setTacticsData" type="client"/>
+	<export function="getPlayerProperty" type="server"/>
+	<export function="getPlayerProperty" type="client"/>
+	<export function="setPlayerProperty" type="server"/>
+	<export function="setPlayerProperty" type="client"/>
+	<export function="setPlayerSpectating" type="server"/>
+	<export function="setPlayerSpectating" type="client"/>
+	<export function="setCameraPrepair" type="server"/>
+	<export function="setCameraPrepair" type="client"/>
+	<export function="stopCameraPrepair" type="server"/>
+	<export function="stopCameraPrepair" type="client"/>
+	<export function="addUserPanelPage" type="client"/>
+	<export function="getPlayerGameStatus" type="server"/>
+	<export function="getPlayerGameStatus" type="client"/>
+	<export function="getPlayerLanguage" type="client"/>
+	<export function="setPlayerLanguage" type="client"/>
+	<export function="getRestoreCount" type="server"/>
+	<export function="getRestoreData" type="server"/>
+	<export function="getCameraSpectateTarget" type="client"/>
+	<export function="getCameraSpectateMode" type="client"/>
+	<export function="isShowRoundHudComponent" type="client"/>
+	<export function="setRoundHudComponent" type="client"/>
+	<export function="showRoundHudComponent" type="client"/>
+	<export function="getRoundMapRoot" type="server"/>
+	<export function="getRoundMapRoot" type="client"/>
+	<export function="getRoundMapDynamicRoot" type="server"/>
+	<export function="getRoundMapDynamicRoot" type="client"/>
+	<export function="createRadarPolyline" type="client"/>
+	<export function="createVoting" type="server"/>
+	<export function="stopVoting" type="server"/>
+	<export function="getVotingInfo" type="server"/>
+	<export function="getLanguageString" type="client"/>
+	<export function="getElementStat" type="server"/>
+	<export function="setElementStat" type="server"/>
+	<export function="giveElementStat" type="server"/>
+	<export function="addServerTeam" type="server"/>
+	<export function="removeServerTeam" type="server"/>
+	<export function="testAccount" http="true" />
+	<export function="getTeamSide" type="server"/>
+    
+	<file src="images/aim_m4.png" />
+	<file src="images/aim_sniper.png" />
+	<file src="images/color_pixel.png" />
+	<file src="images/count_1.png" />
+	<file src="images/count_2.png" />
+	<file src="images/count_3.png" />
+	<file src="images/count_go.png" />
+	<file src="images/factor_3.png" />
+	<file src="images/factor_6.png" />
+	<file src="images/factor_12.png" />
+	<file src="images/factor_25.png" />
+	<file src="images/factor_50.png" />
+	<file src="images/factor_100.png" />
+	<file src="images/invulnerable.png" />
+	<file src="images/key_arrow_l.png" />
+	<file src="images/key_arrow_r.png" />
+	<file src="images/loading.png" />
+	<file src="images/score.png" />
+	<file src="images/save.png" />
+	<file src="images/frag.png" />
+	<file src="images/health.png" />
+    
+	<file src="images/hud/ak47.png"/>
+	<file src="images/hud/bat.png"/>
+	<file src="images/hud/brassknuckle.png"/>
+	<file src="images/hud/camera.png"/>
+	<file src="images/hud/cane.png"/>
+	<file src="images/hud/colt45.png"/>
+	<file src="images/hud/deagle.png"/>
+	<file src="images/hud/detonator.png"/>
+	<file src="images/hud/dildo1.png"/>
+	<file src="images/hud/dildo2.png"/>
+	<file src="images/hud/fireextinguisher.png"/>
+	<file src="images/hud/fist.png"/>
+	<file src="images/hud/flame.png"/>
+	<file src="images/hud/flower.png"/>
+	<file src="images/hud/golfclub.png"/>
+	<file src="images/hud/grenade.png"/>
+	<file src="images/hud/heatseek.png"/>
+	<file src="images/hud/infrared.png"/>
+	<file src="images/hud/katana.png"/>
+	<file src="images/hud/knife.png"/>
+	<file src="images/hud/m4.png"/>
+	<file src="images/hud/minigun.png"/>
+	<file src="images/hud/molotov.png"/>
+	<file src="images/hud/mp5.png"/>
+	<file src="images/hud/nightstick.png"/>
+	<file src="images/hud/nightvision.png"/>
+	<file src="images/hud/parachute.png"/>
+	<file src="images/hud/poolstick.png"/>
+	<file src="images/hud/rifle.png"/>
+	<file src="images/hud/rpg.png"/>
+	<file src="images/hud/satchel.png"/>
+	<file src="images/hud/saw.png"/>
+	<file src="images/hud/sawnoff.png"/>
+	<file src="images/hud/shotgun.png"/>
+	<file src="images/hud/shovel.png"/>
+	<file src="images/hud/silenced.png"/>
+	<file src="images/hud/sniper.png"/>
+	<file src="images/hud/spas12.png"/>
+	<file src="images/hud/spraycan.png"/>
+	<file src="images/hud/teargas.png"/>
+	<file src="images/hud/tec9.png"/>
+	<file src="images/hud/uzi.png"/>
+	<file src="images/hud/vibe1.png"/>
+	<file src="images/hud/vibe2.png"/>
+    
+	<file src="audio/count_1.mp3" />
+	<file src="audio/count_2.mp3" />
+	<file src="audio/count_3.mp3" />
+	<file src="audio/count_go.mp3" />
+	<file src="audio/last_minute.mp3" />
+	<file src="audio/wasted.mp3" />
+
+	<file src="verdana.ttf" />
+	<aclrequest>
+		<right name="function.restartResource" access="true" />
+		<right name="function.startResource" access="true" />
+		<right name="function.stopResource" access="true" />
+		<right name="general.ModifyOtherObjects" access="true" />
+		<right name="function.callRemote" access="true" />
+		<right name="function.getClientIP" access="true" />
+		<right name="function.kickPlayer" access="true" />
+		<right name="function.redirectPlayer" access="true" />
+	</aclrequest>
+</meta>
