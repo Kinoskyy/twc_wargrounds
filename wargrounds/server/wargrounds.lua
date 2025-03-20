@@ -3,7 +3,7 @@
 	  fn.sSettings          = { }; 
 	  fn.sSettings.pGlitch  = { 'fastfire', 'crouchbug', 'quickreload', 'quickstand', 'fastprint', 'fastmove' }; 
 	  fn.sSettings.pSync    = { { 'keysync_mouse_sync_interval', 100 }, { 'player_sync_interval', 100 } }; 
-	  fn.sSettings.sVersion = '12-r20 MBP'; 
+	  fn.sSettings.sVersion = 'Wargrounds'; 
 	  fn.sElements          = {}; 
 	  fn.sElements.root     = getElementByID( 'Tactics' ); 
 	  fn.cache              = { ['config'] = { } }; 
