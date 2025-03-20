@@ -97,7 +97,7 @@ function pauseCommand(thePlayer)
     end
     local playerName = getPlayerName(thePlayer):gsub("#%x%x%x%x%x%x", "")
     isRoundPaused = not isRoundPaused
-    outputChatBox('Admin "' .. playerName .. '" has ' .. (isRoundPaused and "paused" or "resume") .. ' the round.', root, 70, 219, 2)
+    outputChatBox('Admin "' .. playerName .. '" has ' .. (isRoundPaused and "paused" or "resume") .. ' the round', root, 70, 219, 2)
 end
 
 addCommandHandler("pause", pauseCommand)
