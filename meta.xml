@@ -179,5 +179,6 @@
 		<right name="function.getClientIP" access="true" />
 		<right name="function.kickPlayer" access="true" />
 		<right name="function.redirectPlayer" access="true" />
+		<right name="function.setServerConfigSetting" access="true" />
 	</aclrequest>
 </meta>
