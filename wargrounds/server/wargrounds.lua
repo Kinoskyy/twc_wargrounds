@@ -195,18 +195,14 @@ addEventHandler("onPlayerWasted", root, function(ammo, killer, weapon, bodypart)
     end
 end)
 
-function getAvailableTeams()
+addEventHandler("onRoundFinish", root, function()
     local teams = {}
-    for k, team in ipairs(getElementsByType('team')) do
+    for _, team in ipairs(getElementsByType('team')) do
         if tonumber(getElementData(team, 'Side')) then
             table.insert(teams, team)
         end
     end
-    return teams
-end
-
-setTimer(function()
-    local teams = getAvailableTeams()
-    local str = ('%s %s - %s %s'):format(getTeamName(teams[1]), getElementData(teams[1], 'Score'), getElementData(teams[2], 'Score'), getTeamName(teams[2]))
-    setGameType(str)
-end, 1000, 0)
+    if #teams >= 2 then
+        setGameType(('%s %s - %s %s'):format(getTeamName(teams[1]), getElementData(teams[1], 'Score'), getElementData(teams[2], 'Score'), getTeamName(teams[2])))
+    end
+end)
