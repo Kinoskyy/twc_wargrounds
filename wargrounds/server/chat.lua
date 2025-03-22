@@ -1,5 +1,4 @@
 local globalMute = {state = {}}
-
 local messages = {
 	["ez"] = {"#FF69B4 I love you ^^ <3"},
 	["ezz"] = {"#FF69B4 I love you ^^ <3"},
@@ -36,29 +35,38 @@ local messages = {
 
 addEventHandler("onPlayerChat", root, function(msg, tipo)
 	local ser = getPlayerSerial(source)
+        
+	if globalMute.state[ser] then
+		return
+	end
+
+	local teamColor = {255, 255, 255}
+	if getPlayerTeam(source) then
+		teamColor = {getTeamColor(getPlayerTeam(source))}
+	end
+        
+	local teamColorHex = string.format("#%02X%02X%02X", teamColor[1], teamColor[2], teamColor[3])
 
 	if messages[msg] and tipo == 0 then
-		if not globalMute.state[ser] then
-			local c = getPlayerTeam(source) == false and {255, 255, 255} or {getTeamColor(getPlayerTeam(source))}
-			outputChatBox_(getPlayerName(source) .. " (" .. tostring(getElementID(source)) .. "):" .. messages[msg][1] .. "", root, c[1], c[2], c[3], true)
-			return
+		outputChatBox_(teamColorHex .. getPlayerName(source) .. " (" .. tostring(getElementID(source)) .. "):#FFFFFF " .. messages[msg][1], root, 255, 255, 255, true)
+		return
+	end
+	if tipo == 0 then
+		outputChatBox_(teamColorHex .. getPlayerName(source) .. " (" .. tostring(getElementID(source)) .. "):#FFFFFF " .. msg, root, 255, 255, 255, true)
+	elseif tipo == 2 then
+		local team = getPlayerTeam(source)
+		if team then
+			for _, v in ipairs(getPlayersInTeam(team)) do
+				outputChatBox_(teamColorHex .. "(TEAM) " .. getPlayerName(source) .. " (" .. tostring(getElementID(source)) .. "):#FFFFFF " .. msg, v, 255, 255, 255, true)
+			end
 		end
 	end
-
-	local c = getPlayerTeam(source) == false and {255, 255, 255} or {getTeamColor(getPlayerTeam(source))}
-	if tipo == 0 then
-		if not globalMute.state[ser] then outputChatBox_(getPlayerName(source) .. " (" .. tostring(getElementID(source)) .. "):#EBDDB2 " .. msg, root, c[1], c[2], c[3], true) end
-	elseif tipo == 2 then
-		local team = getPlayerTeam(source) == false and cancelEvent() or getPlayerTeam(source)
-		for k, v in ipairs(getPlayersInTeam(team)) do outputChatBox_("(TEAM) " .. getPlayerName(source) .. " (" .. tostring(getElementID(source)) .. "):#EBDDB2 " .. msg, v, c[1], c[2], c[3], true) end
-	end
-
 end)
 
 addCommandHandler("gmute", function(p, _, id)
-	if (hasObjectPermissionTo(p, "function.kickPlayer", false)) then
-		for k, v in ipairs(getElementsByType("player")) do
-			if getElementID(v, "ID") == id then
+	if hasObjectPermissionTo(p, "function.kickPlayer", false) then
+		for _, v in ipairs(getElementsByType("player")) do
+			if getElementID(v) == tonumber(id) then
 				local ser = getPlayerSerial(v)
 				local name = getPlayerName(p)
 				local muted = globalMute.state[ser] ~= true and {true, "muted"} or {false, "unmuted"}
