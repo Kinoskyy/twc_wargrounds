@@ -7,7 +7,6 @@ fn.sSettings.sVersion = 'Wargrounds';
 fn.sElements = {}
 fn.sElements.root = getElementByID('Tactics')
 fn.cache = { ['config'] = {} }
-
 addEventHandler('onPlayerChat', root, function(msg, type)
     if type == 0 then
     elseif (type == 2) then
@@ -17,6 +16,10 @@ addEventHandler('onPlayerChat', root, function(msg, type)
     end
 end)
 
+function fn.removeColorCodes(name)
+    if type(name) ~= "string" then return name end
+    return name:gsub("#%x%x%x%x%x%x", "")
+end
 function fn.startGamemodeModifications()
     fn.sElements.root:setData('version', fn.sSettings and fn.sSettings.sVersion or '1.2')
     setGameType('Tactics ' .. fn.sSettings.sVersion)
@@ -33,7 +36,33 @@ function fn.startGamemodeModifications()
         end
     end
 end
+function fn.removeColorCodes(name)
+    if type(name) ~= "string" then return name end
+    return name:gsub("#%x%x%x%x%x%x", "")
+end
 
+function fn.onPlayerJoin()
+    local cleanName = fn.removeColorCodes(getPlayerName(source))
+    local playerID = source:getID()
+    for _, player in ipairs(getElementsByType("player")) do
+        if hasObjectPermissionTo(player, "function.banPlayer", false) then
+            local country = getResourceFromName("admin"):getState() == "running" and exports.admin:getPlayerCountry(source) or "Unknown"
+            outputChatBox(
+                ">> "..cleanName.." ("..playerID..") connected ("..country..")",
+                player, 191, 192, 193
+            )
+        else
+            outputChatBox(">> "..cleanName.." ("..playerID..") connected", player, 191, 192, 193)
+        end
+    end
+end
+
+function fn.onPlayerQuit(typ, reason)
+    local cleanName = fn.removeColorCodes(getPlayerName(source)) 
+    local message = reason and ("<< "..cleanName.." ("..source:getID()..") has left ("..typ..") ("..reason..")")
+                           or ("<< "..cleanName.." ("..source:getID()..") has left ("..typ..")")
+    outputChatBox(message, root, 191, 192, 193)
+end
 function fn.onPlayerLogin()
     if (hasObjectPermissionTo(source, 'function.banPlayer', false)) then
         local str = ('Welcome back %s you have succesfully logged in (Admin)'):format(source:getName():gsub('#%x%x%x%x%x%x', ''))
@@ -91,10 +120,7 @@ end
 
 local isRoundPaused = false
 function pauseCommand(thePlayer)
-    if not hasObjectPermissionTo(thePlayer, "function.kickPlayer", true) then
-        outputChatBox("No tienes permisos para usar este comando.", thePlayer, 255, 0, 0)
-        return
-    end
+    if not hasObjectPermissionTo(thePlayer, "function.kickPlayer", true) then return end
     local playerName = getPlayerName(thePlayer):gsub("#%x%x%x%x%x%x", "")
     isRoundPaused = not isRoundPaused
     outputChatBox('Admin "' .. playerName .. '" has ' .. (isRoundPaused and "paused" or "resume") .. ' the round', root, 70, 219, 2)
@@ -135,30 +161,44 @@ addEventHandler('onPlayerCommand', root, fn.onPlayerCommand)
 addEventHandler('onMapStarting', root, fn.onMapStarting)
 addEventHandler('onPlayerRemoveFromRound', root, fn.onPlayerRemovedFromRound)
 addEventHandler('onPlayerRoundRespawn', root, fn.onPlayerRoundRespawn)
-
 addEventHandler("onPlayerWeaponpackGot", root, function(weapons)
     local t = getPlayerTeam(source)
     local mapInfo = getRoundMapInfo()
     if (mapInfo.modename == 'ctf') then return end
     if (isPedDead(source)) then return end
+    
     if getElementData(source, "Weapons") then
         if t then
             local r, g, b = getTeamColor(t)
             local hex = RGBToHex(r, g, b)
+            local playerName = fn.removeColorCodes(getPlayerName(source))  -- Nombre sin códigos de color
+            
             if tostring(getElementData(t, "Side")) == "1" then
                 for k, v in ipairs(getPlayersInTeam(t)) do
                     if #weapons == 2 then
-                        outputChatBox_(getPlayerName(source) .. " #FFFFFFhas selected (" .. hex .. "" .. firstUpper(weapons[1].name) .. " - " .. firstUpper(weapons[2].name) .. "#FFFFFF)", v, r, g, b, true)
+                        outputChatBox_(
+                            hex..playerName.." #FFFFFFhas selected ("..hex..firstUpper(weapons[1].name).." - "..firstUpper(weapons[2].name).."#FFFFFF)", 
+                            v, r, g, b, true
+                        )
                     elseif #weapons == 3 then
-                        outputChatBox(getPlayerName(source) .. " #FFFFFFhas selected (" .. hex .. "" .. firstUpper(weapons[1].name) .. " - " .. firstUpper(weapons[2].name) .. " - " .. firstUpper(weapons[3].name) .. "#FFFFFF)", v, r, g, b, true)
+                        outputChatBox_(
+                            hex..playerName.." #FFFFFFhas selected ("..hex..firstUpper(weapons[1].name).." - "..firstUpper(weapons[2].name).." - "..firstUpper(weapons[3].name).."#FFFFFF)", 
+                            v, r, g, b, true
+                        )
                     end
                 end
             elseif tostring(getElementData(t, "Side")) == "2" then
                 for k, v in ipairs(getPlayersInTeam(t)) do
                     if #weapons == 2 then
-                        outputChatBox_(getPlayerName(source) .. " #FFFFFFhas selected (" .. hex .. "" .. firstUpper(weapons[1].name) .. " - " .. firstUpper(weapons[2].name) .. "#FFFFFF)", v, r, g, b, true)
+                        outputChatBox_(
+                            hex..playerName.." #FFFFFFhas selected ("..hex..firstUpper(weapons[1].name).." - "..firstUpper(weapons[2].name).."#FFFFFF)", 
+                            v, r, g, b, true
+                        )
                     elseif #weapons == 3 then
-                        outputChatBox_(getPlayerName(source) .. " #FFFFFFhas selected (" .. hex .. "" .. firstUpper(weapons[1].name) .. " - " .. firstUpper(weapons[2].name) .. " - " .. firstUpper(weapons[3].name) .. "#FFFFFF)", v, r, g, b, true)
+                        outputChatBox_(
+                            hex..playerName.." #FFFFFFhas selected ("..hex..firstUpper(weapons[1].name).." - "..firstUpper(weapons[2].name).." - "..firstUpper(weapons[3].name).."#FFFFFF)", 
+                            v, r, g, b, true
+                        )
                     end
                 end
             end
@@ -177,13 +217,6 @@ function onRoundStart()
 end
 
 addEventHandler("onRoundStart", getRootElement(), onRoundStart)
-
-addEventHandler("onPlayerWasted", root, function(_, k)
-    if isElement(k) and getElementType(k) == "player" then
-        triggerClientEvent(k, "showKiller", k, source)
-    end
-end)
-
 addEventHandler("onPlayerWasted", root, function(ammo, killer, weapon, bodypart)
     local mapInfo = getRoundMapInfo()
     if mapInfo.modename ~= 'ctf' then
