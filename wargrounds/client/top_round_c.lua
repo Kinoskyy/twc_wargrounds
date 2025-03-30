@@ -54,18 +54,18 @@ function Map.Render( )
             dxDrawTextAligned( Round.winner == attackname and 'WINNER' or 'LOSER', screen.x/2 - 25 * scale - rectW / 2, screen.y/2-rectH/2+((rectH/7)/2), _,_, tocolor(255,255,255 ), (math.max(1, math.floor(3*scale))), 'bankgothic', 'center', 'center', false, false, false, true, false )
         end 
         local offsetx, offsety = screen.x/2 - rectW - 25*scale, screen.y/2-rectH/2+rectH/7; 
-        dxDrawShadowText( 'Name: ', offsetx+10*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, true )
-        dxDrawShadowText( 'Kills: ', offsetx+350*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, true )
-        dxDrawShadowText( 'HP: ', offsetx+450*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, true )
-        dxDrawShadowText( 'Damage: ', offsetx+560*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, true )
+        dxDrawTextAligned( 'Name: ', offsetx+10*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, false )
+        dxDrawTextAligned( 'Kills: ', offsetx+350*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, false )
+        dxDrawTextAligned( 'HP: ', offsetx+450*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, false )
+        dxDrawTextAligned( 'Damage: ', offsetx+560*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, false )
         local killsx, hpx, dmgx = offsetx+350*scale - dxGetTextWidth( 'Kills: ', 1, font_2 )/2, offsetx+450*scale - dxGetTextWidth( 'HP: ', 1, font_2 )/2, offsetx+560*scale- dxGetTextWidth( 'Damage: ', 1, font_2 )/2
         offsety = offsety + 25*scale; 
         for k, v in pairs( Round.p ) do 
             if( v.Team == team ) then 
-                dxDrawTextAligned(  v.Name, offsetx+10*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, true )
-                dxDrawShadowText( tostring(v.Kills), killsx, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, true )
-                dxDrawShadowText( tostring(math.floor(v.Health+v.Armor)), hpx, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, true )
-                dxDrawShadowText( tostring(v.Damage), dmgx, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, true )
+                dxDrawTextAligned(removeColorCodes(v.Name), offsetx+10*scale, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, false)
+                dxDrawTextAligned( tostring(v.Kills), killsx, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, false )
+                dxDrawTextAligned( tostring(math.floor(v.Health+v.Armor)), hpx, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, false )
+                dxDrawTextAligned( tostring(v.Damage), dmgx, offsety+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, false )
                 offsety = offsety + 25*scale; 
             end 
         end
@@ -81,18 +81,18 @@ function Map.Render( )
             dxDrawTextAligned(Round.winner == defenseName and 'WINNER' or 'LOSER', screen.x/2 + 30*scale + rectW / 2, screen.y/2-rectH/2+((rectH/7)/2), _,_, tocolor(255,255,255), (math.max(1, math.floor(3*scale))), 'bankgothic', 'center', 'center', false, false, false, true, false )
         end 
         local offsetx2, offsety2 = screen.x/2 + 30*scale, screen.y/2-rectH/2+rectH/7; 
-        dxDrawShadowText( 'Name: ', offsetx2+10*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, true )
-        dxDrawShadowText( 'Kills: ', offsetx2+350*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, true )
-        dxDrawShadowText( 'HP: ', offsetx2+450*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, true )
-        dxDrawShadowText( 'Damage: ', offsetx2+560*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, true )
+        dxDrawTextAligned( 'Name: ', offsetx2+10*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, false )
+        dxDrawTextAligned( 'Kills: ', offsetx2+350*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, false )
+        dxDrawTextAligned( 'HP: ', offsetx2+450*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, false )
+        dxDrawTextAligned( 'Damage: ', offsetx2+560*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'right', 'top', false, false, false, true, false )
         local killsx2, hpx2, dmgx2 = offsetx2+350*scale - dxGetTextWidth( 'Kills: ', 1, font_2 )/2, offsetx2+450*scale - dxGetTextWidth( 'HP: ', 1, font_2 )/2, offsetx2+560*scale- dxGetTextWidth( 'Damage: ', 1, font_2 )/2
         offsety2 = offsety2 + 25*scale; 
         for k, v in pairs( Round.p ) do 
             if( v.Team == team2 ) then 
-                dxDrawShadowText( v.Name, offsetx2+10*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, true )
-                dxDrawShadowText( tostring(v.Kills), killsx2, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, true )
-                dxDrawShadowText( tostring(math.floor(v.Health+v.Armor) ), hpx2, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, true )
-                dxDrawShadowText( tostring(v.Damage), dmgx2, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, true )
+                dxDrawTextAligned(removeColorCodes(v.Name), offsetx2+10*scale, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'left', 'top', false, false, false, true, false)
+                dxDrawTextAligned( tostring(v.Kills), killsx2, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, false )
+                dxDrawTextAligned( tostring(math.floor(v.Health+v.Armor) ), hpx2, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, false )
+                dxDrawTextAligned( tostring(v.Damage), dmgx2, offsety2+25*scale, _,_, tocolor(255,255,255), 1, font_2, 'center', 'top', false, false, false, true, false )
                 offsety2 = offsety2 + 25*scale; 
             end 
         end 
@@ -101,7 +101,7 @@ function Map.Render( )
         local mostHP, hpColor = getMostHP( Round.p ); 
         local offsetx, offsety = (25*scale)+screen.x/2-((rectW+25*scale)*2)/2, screen.y/2+rectH/2+25*scale
         dxDrawRectangle( offsetx, offsety, ((rectW)*2), rectH/6, tocolor(0,0,0,50))
-		dxDrawShadowText( 'Most Damage: '..damageColor..mostDamage:gsub('#%x%x%x%x%x%x', ''), offsetx+(((rectW+25*scale)*2)/2), offsety+(rectH/6)/2, _,_, tocolor(255, 255, 255 ), 1, font_2, 'center', 'center', false, false, false, true, false )
+		dxDrawShadowText( 'Most Damage: '..damageColor..mostDamage:gsub('#%x%x%x%x%x%x', ''), offsetx+(((rectW+25*scale)*2)/2), offsety+(rectH/6)/2, _,_, tocolor(255, 255, 255 ), 1, font_2, 'center', 'center', false, false, false, true, false ) 
 		dxDrawShadowText( 'Most Kills: '..killsColor..mostKills:gsub('#%x%x%x%x%x%x', ''), offsetx+50*scale, offsety+(rectH/6)/2, _,_, tocolor(255, 255, 255 ), 1, font_2, 'left', 'center', false, false, false, true, false )
 		dxDrawShadowText( 'Most HP: '..hpColor..mostHP:gsub('#%x%x%x%x%x%x', ''), offsetx+(((rectW)*2))-50*scale, offsety+(rectH/6)/2, _,_, tocolor(255, 255, 255 ), 1, font_2, 'right', 'center', false, false, false, true, false )
     end
@@ -187,124 +187,3 @@ addEventHandler(
         end 
     end 
 )
-
-local screen = {guiGetScreenSize()}
-local font = 'bankgothic' 
-local joinlogs = {}
-local quitlogs = {}
-
-function getScreenPos(x, y, w, h)
-    local sw, sh = guiGetScreenSize()
-    return (x/100) * sw, (y/100) * sh, (w/100) * sw, (h/100) * sh
-end
-
-function loadMod(states)
-    if (states == true) then
-        if not isEventHandlerAdded('onClientRender', root, joinQuit) then
-            addEventHandler("onClientRender", getRootElement(), joinQuit)
-        end
-    else
-        removeEventHandler("onClientRender", getRootElement(), joinQuit)
-    end
-end
-local screen = {guiGetScreenSize()}
-local font = 'bankgothic' 
-local joinlogs = {}
-local quitlogs = {}
-
-function getScreenPos(x, y, w, h)
-    local sw, sh = guiGetScreenSize()
-    return (x/100) * sw, (y/100) * sh, (w/100) * sw, (h/100) * sh
-end
-
-local posTextJoin = {
-    {getScreenPos(1, 21.9, 75.0, 24.5)},
-    {getScreenPos(1, 25.4, 75.0, 28.0)},
-    {getScreenPos(1, 27.9, 75.0, 32.1)},
-    {getScreenPos(1, 31.4, 75.0, 36.2)},
-    {getScreenPos(1, 34.9, 75.0, 38.8)},
-    {getScreenPos(1, 28.4, 75.0, 42.8)},
-    {getScreenPos(1, 42.9, 75.0, 48.0)},
-    {getScreenPos(1, 45.4, 75.0, 50.6)},
-}
-
-local posTextQuit = {
-    {getScreenPos(1, 24.9, 75.0, 27.5)},
-    {getScreenPos(1, 28.4, 75.0, 31.0)},
-    {getScreenPos(1, 30.9, 75.0, 35.1)},
-    {getScreenPos(1, 34.4, 75.0, 39.2)},
-    {getScreenPos(1, 37.9, 75.0, 51.8)},
-    {getScreenPos(1, 31.4, 75.0, 45.8)},
-    {getScreenPos(1, 45.9, 75.0, 51.0)},
-    {getScreenPos(1, 48.4, 75.0, 53.6)},
-}
-
-function loadMod(states)
-    if (states == true) then
-        if not isEventHandlerAdded('onClientRender', root, joinQuit) then
-            addEventHandler("onClientRender", getRootElement(), joinQuit)
-        end
-    else
-        removeEventHandler("onClientRender", getRootElement(), joinQuit)
-    end
-end
-
-function joinQuit()
-    for i, v in ipairs(joinlogs) do
-        if i <= 8 then
-            local alphaJoin = interpolateBetween(255, 0, 0, 0, 0, 0, ((getTickCount() - v[2]) / 6000), 'Linear')
-            local nameWidth = dxGetTextWidth(v[1], 0.7, font)
-            dxDrawText(v[1], posTextJoin[i][1], posTextJoin[i][2], posTextJoin[i][3], posTextJoin[i][4], tocolor(255, 0, 0, alphaJoin), 0.7, font, "left", "center", false, true, false, false, false)
-            dxDrawText(" : ESTA ONLINE.", posTextJoin[i][1] + nameWidth, posTextJoin[i][2], posTextJoin[i][3], posTextJoin[i][4], tocolor(0, 255, 0, alphaJoin), 0.6, font, "left", "center", false, true, false, false, false)
-
-            if alphaJoin == 0 then 
-                table.remove(joinlogs, i)
-            end
-        end
-    end
-    
-    for i, v in ipairs(quitlogs) do
-        if i <= 8 then
-            local alphaQuit = interpolateBetween(255, 0, 0, 0, 0, 0, ((getTickCount() - v[2]) / 6000), 'Linear')
-            local playerName, reason = v[1]:match("^(.-) %((.-)%)$")
-            if not playerName then
-                playerName = v[1]
-                reason = v[4] or "desconocida"
-            end
-            local nameWidth = dxGetTextWidth(playerName, 0.7, font)
-            local statusWidth = dxGetTextWidth(": ESTA OFFLINE.", 0.6, font)
-            dxDrawText(playerName, posTextQuit[i][1], posTextQuit[i][2], posTextQuit[i][3], posTextQuit[i][4], tocolor(0, 0, 255, alphaQuit), 0.7, font, "left", "center", false, true, false, false, false)
-            dxDrawText(" : ESTA OFFLINE. [" .. reason .. "]", posTextQuit[i][1] + nameWidth, posTextQuit[i][2], posTextQuit[i][3], posTextQuit[i][4], tocolor(255, 0, 0, alphaQuit), 0.6, font, "left", "center", false, true, false, false, false)
-            
-            if alphaQuit == 0 then 
-                table.remove(quitlogs, i)
-            end
-        end
-    end
-end
-addEventHandler('onClientRender', root, joinQuit)
-addEvent('addJoinMessage', true)
-addEventHandler('addJoinMessage', root,
-    function(msg, img, reason)
-        if img == 'Join' then
-            table.insert(joinlogs, {msg, getTickCount(), img, reason})
-        elseif img == 'Quit' then
-            table.insert(quitlogs, {msg, getTickCount(), img, reason})
-        end
-    end
-)
-
-addEventHandler('onClientPlayerQuit', root,
-    function(reason)
-        local playerName = string.gsub(getPlayerName(source), "#%x%x%x%x%x%x", "")
-        local message = string.format("%s", playerName, reason)
-        triggerEvent('addJoinMessage', root, message, 'Quit', reason)
-    end
-)
-addEventHandler('onClientPlayerJoin', root,
-    function()
-        local playerName = string.gsub(getPlayerName(source), "#%x%x%x%x%x%x", "")
-        local message = string.format("%s", playerName)
-        triggerEvent('addJoinMessage', root, message, 'Join')
-    end
-) 
