@@ -14,8 +14,6 @@
 	<script src="wargrounds/client/config.lua" type="client"/>
 	<script src="wargrounds/client/cross.lua" type="client"/>
 	<script src="wargrounds/client/dancingTactics_C.lua" type="client"/>
-	<script src="wargrounds/client/expl_C.lua" type="client"/>
-	<script src="wargrounds/client/killer.lua" type="client"/>
 	<script src="wargrounds/client/mark_C.lua" type="client"/>
 	<script src="wargrounds/client/top_round_c.lua" type="client"/>
 
@@ -25,7 +23,6 @@
 	<script src="wargrounds/server/anticheat.lua" type="server"/>
 	<script src="wargrounds/server/armagirando_S.lua" type="server"/>
 	<script src="wargrounds/server/chat.lua" type="server"/>
-	<script src="wargrounds/server/expl_S.lua" type="server"/>
 	<script src="wargrounds/server/mark_S.lua" type="server"/>
 	<script src="wargrounds/server/players_s.lua" type="server"/>
 	<script src="wargrounds/server/rs.lua" type="server"/>
@@ -168,7 +165,7 @@
 	<file src="audio/count_go.mp3" />
 	<file src="audio/last_minute.mp3" />
 	<file src="audio/wasted.mp3" />
-
+	<file src="audio/first_blood.mp3" />
 	<file src="verdana.ttf" />
 	<aclrequest>
 		<right name="function.restartResource" access="true" />
