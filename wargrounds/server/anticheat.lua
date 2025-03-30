@@ -12,8 +12,6 @@ addEventHandler(
 	end
 )
 
-
-
 addEvent("wargrounds:handleScreenshot", true)
 addEventHandler(
 	"wargrounds:handleScreenshot", root, function()
@@ -37,8 +35,6 @@ addEventHandler(
 		
 	end
 )
-
-
 
 addEvent("reportArmour", true)
 addEventHandler(
@@ -97,4 +93,3 @@ function toggleScreenshotKick(player, _, _)
 end
 addCommandHandler("screenshots", toggleScreenshotKick)
 addCommandHandler("ss", toggleScreenshotKick)
-
