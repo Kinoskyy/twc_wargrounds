@@ -27,3 +27,11 @@ function markTarget(key, keyState)
     setTimer(function() cooldown = false end, 5000, 1)
 end
 bindKey("lalt", "down", markTarget)
+function playFirstBloodSound(soundFile)
+    local soundElement = playSound(soundFile)  
+    if soundElement then
+        setSoundVolume(soundElement, 1.0)
+    end
+end
+addEvent("playSoundForClient", true)
+addEventHandler("playSoundForClient", resourceRoot, playFirstBloodSound)
