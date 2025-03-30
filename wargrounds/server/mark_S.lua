@@ -1,107 +1,81 @@
-local globalMute = {state = {}}
-local messages = {
-    ["ez"] = {"#FF69B4 I love you ^^ <3"},
-    ["ezz"] = {"#FF69B4 I love you ^^ <3"},
-    ["gg"] = {"#22FF00 Good Game"},
-    ["gl"] = {"#22FF00 Good Luck"},
-    ["bg"] = {"#FF0000 Bad Game"},
-    ["bl"] = {"#FF0000 Bad Luck"},
-    ["ok"] = {"#4A1F00 ok nerd"},
-    ["smd"] = {"#22FF00 suck my dick >_<"},
-    ["ggwp"] = {"#C4A20C Well played"},
-    ["lol"] = {"#FFA500 Laughing out loud :D"},
-    ["omg"] = {"#FFA500 Oh my God!"},
-    ["brb"] = {"#00CED1 Be right back"},
-    ["idk"] = {"#00CED1 I don't know"},
-    ["thanks"] = {"#C71585 Thanks!"},
-    ["gtg"] = {"#00BFFF Got to go"},
-    ["smile"] = {"#FFFF00 :)"},
-    ["grin"] = {"#FFFF00 :D"},
-    ["sad"] = {"#FF0000 :("},
-    ["love"] = {"#FF1493 <3"},
-    ["wink"] = {"#FF69B4 ;)"},
-    ["happy"] = {"#22FF00 :happy:"},
-    ["shy"] = {"#FF69B4 <.<"},
-    ["surprised"] = {"#FF0000 o_O"},
-    ["bored"] = {"#4A4A4A --"},
-    ["angry"] = {"#FF0000 :angry:"},
-    ["laugh"] = {"#FFFF00 XD"},
-    ["cute"] = {"#FF69B4 :3"},
-    ["dance"] = {"#FF69B4 :dancing:"},
-    ["dancing"] = {"#FF69B4 :dancing:"},
-    ["thx"] = {"#C71585 Thanks!"},
-    ['uwu'] = { '#FF69B4 I love dicks! >.<'}
-}
+local teamMarkers = {}
+local firstBloodOccurred = false
+local firstBloodSoundPlayed = false
 
-function removeColorCodes(text)
-    return text:gsub('#%x%x%x%x%x%x', '')
-end
-
-function formatChatMessage(player, message, isTeamChat)
-    local teamColor = {255, 255, 255}
-    if getPlayerTeam(player) then
-        teamColor = {getTeamColor(getPlayerTeam(player))}
-    end
-    
-    local teamColorHex = string.format("#%02X%02X%02X", teamColor[1], teamColor[2], teamColor[3])
-    local playerName = removeColorCodes(getPlayerName(player))
-    local playerID = tostring(getElementID(player))
-    
-    if isTeamChat then
-        return teamColorHex.."(TEAM) "..playerName.." ("..playerID.."):#FFFFFF "..message
-    else
-        return teamColorHex..playerName.." ("..playerID.."):#FFFFFF "..message
-    end
-end
-
-addEventHandler("onPlayerChat", root, function(msg, msgType)
-    local serial = getPlayerSerial(source)
-    
-    if globalMute.state[serial] and msgType ~= 2 then
-        cancelEvent()
+function createTeamMarker(startX, startY, startZ, hitX, hitY, hitZ, team)
+    local player = client
+    if not player then return end
+    if getElementInterior(player) == 3 then return end
+    local playerName = removeColorCoding(getPlayerName(player))
+    local r, g, b = getTeamColor(team)
+    local marker = createMarker(hitX, hitY, hitZ + 3, "arrow", 1, r, g, b, 150)
+    if not marker then return end
+    local blip = createBlip(hitX, hitY, hitZ, 0, 2, r, g, b, 255, 0, 99999.0)
+    if not blip then
+        destroyElement(marker)
         return
     end
-    
-    if messages[msg:lower()] and msgType == 0 then
-        outputChatBox_(formatChatMessage(source, messages[msg:lower()][1]), root, 255, 255, 255, true)
-        cancelEvent()
-        return
+    setElementVisibleTo(blip, getRootElement(), false)
+    for _, teamPlayer in ipairs(getPlayersInTeam(team)) do
+        setElementVisibleTo(blip, teamPlayer, true)
     end
-    
-    if msgType == 0 then
-        outputChatBox_(formatChatMessage(source, msg), root, 255, 255, 255, true)
-        cancelEvent()
-    elseif msgType == 2 then
-        local team = getPlayerTeam(source)
-        if team then
-            for _, player in ipairs(getPlayersInTeam(team)) do
-                outputChatBox_(formatChatMessage(source, msg, true), player, 255, 255, 255, true)
-            end
+    setElementVisibleTo(marker, getRootElement(), false)
+    for _, teamPlayer in ipairs(getPlayersInTeam(team)) do
+        setElementVisibleTo(marker, teamPlayer, true)
+    end
+    teamMarkers[marker] = { marker = marker, blip = blip }
+    setTimer(destroyTeamMarker, 10000, 1, marker, playerName, team, r, g, b)
+    for _, teamPlayer in ipairs(getPlayersInTeam(team)) do
+        outputChatBox(playerName .. " has indicated an objective.", teamPlayer, r, g, b)
+    end
+end
+addEvent("createTeamMarker", true)
+addEventHandler("createTeamMarker", resourceRoot, createTeamMarker)
+
+function destroyTeamMarker(marker, playerName, team, r, g, b)
+    if isElement(marker) then
+        destroyElement(marker)
+        if teamMarkers[marker] and isElement(teamMarkers[marker].blip) then
+            destroyElement(teamMarkers[marker].blip)
         end
-        cancelEvent()
+        teamMarkers[marker] = nil
     end
-end)
+end
 
-addCommandHandler("gmute", function(player, cmd, targetID)
-    if not hasObjectPermissionTo(player, "function.kickPlayer", false) then return end
-    if not targetID then return end
-    local target = getPlayerByID(targetID)
-    if not target then return end
-    local targetSerial = getPlayerSerial(target)
-    local adminName = removeColorCodes(getPlayerName(player))
-    local targetName = removeColorCodes(getPlayerName(target))
-    
-    globalMute.state[targetSerial] = not globalMute.state[targetSerial]
-    local action = globalMute.state[targetSerial] and "muted" or "unmuted"
-    
-    outputChatBox_(
-        "Admin \""..adminName.."\" has global "..action.." \""..targetName.."\"", root, 70, 219, 2, true)
-end)
-function getPlayerByID(id)
+function playSoundToAll(soundFile)
     for _, player in ipairs(getElementsByType("player")) do
-        if tostring(getElementID(player)) == tostring(id) then
-            return player
+        triggerClientEvent(player, "playSoundForClient", resourceRoot, soundFile)
+    end
+end
+
+function onRoundStartHandler()
+    firstBloodOccurred = false
+    firstBloodSoundPlayed = false
+end
+addEventHandler("onRoundStart", root, onRoundStartHandler)
+
+function onPlayerWasted(ammo, killer, weapon, bodypart)
+    if not firstBloodOccurred and killer and killer ~= source and getElementType(killer) == "player" then
+        firstBloodOccurred = true
+        
+        if not firstBloodSoundPlayed then
+            playSoundToAll("audio/first_blood.mp3")
+            firstBloodSoundPlayed = true
+
+            local killerName = removeColorCoding(getPlayerName(killer))
+            local victimName = removeColorCoding(getPlayerName(source))
+            local attackerTeam = getPlayerTeam(killer)
+            local r, g, b = 255, 255, 255 
+            if attackerTeam then
+                r, g, b = getTeamColor(attackerTeam)
+            end
+
+            outputChatBox("First Blood! "..killerName.." has Killed "..victimName, root, r, g, b, true)
         end
     end
-    return false
+end
+addEventHandler("onPlayerWasted", root, onPlayerWasted)
+
+function removeColorCoding(name)
+    return type(name) == 'string' and string.gsub(name, '#%x%x%x%x%x%x', '') or name
 end
