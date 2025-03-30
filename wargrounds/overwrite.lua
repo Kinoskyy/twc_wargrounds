@@ -1,11 +1,15 @@
 setWeather_ =  setWeather
 setWeather = function() end
+
 setTime_ = setTime
 setTime = function() end
+
 setSkyGradient_ = setSkyGradient
 setSkyGradient = function() end
+
 setMinuteDuration_ = setMinuteDuration
 setMinuteDuration = function() end
+
 outputChatBox_ = outputChatBox
 outputChatBox =
 function(msg, to, r, g, b, bool)
@@ -20,14 +24,19 @@ function(msg, to, r, g, b, bool)
 		end
 	end
 end
+
 setFogDistance_ = setFogDistance
 setFogDistance = function() end
+
 setFarClipDistance_ = setFarClipDistance
 setFarClipDistance = function() end
+
 setSunSize_ = setSunSize
 setSunSize = function() end
+
 setSunColor_ = setSunColor
 setSunColor = function() end
+
 if( guiGetScreenSize ) then 
 	dxDrawText_ = dxDrawText; 
 	local screen = Vector2( guiGetScreenSize( )); 
