@@ -171,7 +171,7 @@ addEventHandler("onPlayerWeaponpackGot", root, function(weapons)
         if t then
             local r, g, b = getTeamColor(t)
             local hex = RGBToHex(r, g, b)
-            local playerName = fn.removeColorCodes(getPlayerName(source))  -- Nombre sin códigos de color
+            local playerName = fn.removeColorCodes(getPlayerName(source))
             
             if tostring(getElementData(t, "Side")) == "1" then
                 for k, v in ipairs(getPlayersInTeam(t)) do
