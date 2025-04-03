@@ -65,17 +65,22 @@ function onPlayerWasted(ammo, killer, weapon, bodypart)
             local killerName = removeColorCoding(getPlayerName(killer))
             local victimName = removeColorCoding(getPlayerName(source))
             local attackerTeam = getPlayerTeam(killer)
-            local r, g, b = 255, 255, 255 
+            local victimTeam = getPlayerTeam(source)
+            local rAttacker, gAttacker, bAttacker = 255, 255, 255
+            local rVictim, gVictim, bVictim = 255, 255, 255
+            
             if attackerTeam then
-                r, g, b = getTeamColor(attackerTeam)
+                rAttacker, gAttacker, bAttacker = getTeamColor(attackerTeam)
             end
-
-            outputChatBox("First Blood! "..killerName.." has Killed "..victimName, root, r, g, b, true)
+            if victimTeam then
+                rVictim, gVictim, bVictim = getTeamColor(victimTeam)
+            end
+            local message = "#"..string.format("%02X%02X%02X", rAttacker, gAttacker, bAttacker).."First Blood! "..killerName.." has killed ".."#"..string.format("%02X%02X%02X", rVictim, gVictim, bVictim)..victimName
+            outputChatBox(message, root, 255, 255, 255, true)
         end
     end
 end
 addEventHandler("onPlayerWasted", root, onPlayerWasted)
-
 function removeColorCoding(name)
     return type(name) == 'string' and string.gsub(name, '#%x%x%x%x%x%x', '') or name
 end
